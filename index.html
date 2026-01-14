@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seagull Tech Solutions - Reliable Cloud & Data Engineering</title>
+    <meta name="description" content="Expert data engineering, SRE, and cloud solutions on AWS & GCP. We solve complex technical challenges and build AI-ready, reliable systems that scale.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seagulltech.co.uk">
+    <meta property="og:title" content="Seagull Tech Solutions - Reliable Cloud & Data Engineering">
+    <meta property="og:description" content="Expert data engineering, SRE, and cloud solutions on AWS & GCP. We solve complex technical challenges and build AI-ready, reliable systems that scale.">
+    <meta property="og:image" content="https://seagulltech.co.uk/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://seagulltech.co.uk">
+    <meta property="twitter:title" content="Seagull Tech Solutions - Reliable Cloud & Data Engineering">
+    <meta property="twitter:description" content="We solve complex technical challenges and build AI-ready, reliable systems that scale.">
+    <meta property="twitter:image" content="https://seagulltech.co.uk/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'seagull-green': '#10b981',
+                        'seagull-dark-green': '#059669',
+                        'seagull-dark': '#0f172a',
+                        'seagull-dark-2': '#1e293b',
+                    },
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter text-gray-800 bg-white">
+    <!-- Skip to main content -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-seagull-green focus:text-white focus:rounded-lg focus:shadow-lg">
+        Skip to main content
+    </a>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 py-5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Seagull Tech Solutions logo featuring interlocked green and navy circles" class="h-14 lg:h-16">
+                <div>
+                    <div class="font-montserrat text-lg font-extrabold text-seagull-dark tracking-tight">
+                        Seagull Tech Solutions
+                    </div>
+                    <div class="text-xs font-semibold text-seagull-green uppercase tracking-wider">
+                        Platform & Data Experts
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex gap-10 items-center">
+                <a href="#services" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">Services</a>
+                <a href="#about" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-seagull-dark focus:outline-none focus:ring-2 focus:ring-seagull-green rounded p-2" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 mt-5">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#services" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">Services</a>
+                <a href="#about" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">About</a>
+                <a href="#contact" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-br from-gray-50 via-green-50/30 to-gray-50 py-24 lg:py-32 px-6 overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-seagull-dark/5 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-seagull-green/10 rounded-full"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex items-center gap-2 text-seagull-green font-semibold mb-5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                <span>Reliable Data & Infrastructure</span>
+            </div>
+            <h1 class="font-montserrat text-5xl lg:text-7xl font-extrabold text-seagull-dark mb-8 leading-tight tracking-tight">
+                Systems that run <span class="text-seagull-green">smoothly</span>
+            </h1>
+            <p class="text-xl lg:text-2xl text-gray-600 mb-10 max-w-4xl leading-relaxed">
+                We deliver data engineering and SRE projects that solve your biggest challenges. Building reliable, scalable systems tailored to your business needs.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 mb-16">
+                <a href="#contact" class="inline-flex items-center justify-center gap-3 bg-seagull-dark text-white px-10 py-4 rounded-full font-semibold text-lg hover:-translate-y-0.5 hover:shadow-xl transition-all focus:outline-none focus:ring-4 focus:ring-seagull-green/50">
+                    Get In Touch
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                <a href="#services" class="inline-flex items-center justify-center gap-3 bg-white text-seagull-dark px-10 py-4 rounded-full font-semibold text-lg border-2 border-gray-200 hover:border-seagull-green hover:text-seagull-green transition-all focus:outline-none focus:ring-4 focus:ring-seagull-green/20">
+                    View Our Services
+                </a>
+            </div>
+
+            <!-- Stats/Metrics Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
+                <div class="text-center">
+                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">7+</div>
+                    <div class="text-sm lg:text-base text-gray-600 font-medium">Years Experience</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">
+                        <svg class="w-10 h-10 mx-auto text-seagull-green" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                    </div>
+                    <div class="text-sm lg:text-base text-gray-600 font-medium">Multiple Industries</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">
+                        <svg class="w-10 h-10 mx-auto text-seagull-green" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                        </svg>
+                    </div>
+                    <div class="text-sm lg:text-base text-gray-600 font-medium">Cloud Native</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">
+                        <svg class="w-10 h-10 mx-auto text-seagull-green" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                        </svg>
+                    </div>
+                    <div class="text-sm lg:text-base text-gray-600 font-medium">End-to-End Solutions</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <main id="main">
+        <section id="services" class="relative bg-white py-20 lg:py-28 px-6">
+            <!-- Subtle decorative element -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-seagull-green font-bold text-lg mb-5 text-center">What We Do</div>
+                <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-seagull-dark mb-16 text-center leading-tight">
+                    Services tailored to your needs
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Data Engineering -->
+                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                        <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">Data Engineering</h3>
+                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                            Turn data chaos into actionable insights. We build robust pipelines, warehouses, and AI-ready architectures that solve your data challenges.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Python</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Apache Airflow</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">dbt</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">AI/ML</span>
+                        </div>
+                    </div>
+
+                    <!-- SRE -->
+                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                        <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">Site Reliability Engineering</h3>
+                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                            Eliminate downtime and performance issues. We implement monitoring, automation, and resilient infrastructure that keeps your systems running smoothly.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Kubernetes</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Terraform</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Grafana</span>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Solutions -->
+                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                        <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">AWS & GCP Solutions</h3>
+                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                            Cut costs and complexity in the cloud. We architect, migrate, and optimize workloads across AWS and GCP to solve your scalability challenges.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">AWS</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">GCP</span>
+                            <span class="text-xs font-semibold px-3 py-1.5 bg-seagull-green/10 text-seagull-dark-green rounded-full">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative bg-gradient-to-b from-gray-50 to-white py-20 lg:py-28 px-6 overflow-hidden">
+        <!-- Decorative Pattern -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, #10b981 35px, #10b981 36px);"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-seagull-green font-bold text-lg mb-5">About Us</div>
+            <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-seagull-dark mb-8 leading-tight">
+                Engineering reliability at scale
+            </h2>
+            <p class="text-xl lg:text-2xl text-gray-700 mb-12 max-w-5xl leading-relaxed font-medium">
+                We're data engineers and SRE specialists who solve complex technical challenges. Our team builds reliable pipelines, implements AI-ready data platforms, and creates resilient systems that help you ship faster and scale confidently.
+            </p>
+
+            <div class="space-y-5 max-w-3xl">
+                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl text-seagull-dark font-medium">Expert data engineering team</span>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl text-seagull-dark font-medium">Proven project delivery track record</span>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl text-seagull-dark font-medium">Modern DevOps practices</span>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl text-seagull-dark font-medium">Tailored solutions for your needs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative bg-gradient-to-br from-seagull-dark via-seagull-dark-2 to-seagull-dark py-20 lg:py-28 px-6 overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-10 right-10 w-64 h-64 bg-seagull-green/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 left-10 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl"></div>
+            <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%2310b981&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-seagull-green font-bold text-lg mb-5">Get In Touch</div>
+            <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-white mb-8 leading-tight">
+                Let's build something great together
+            </h2>
+            <p class="text-xl lg:text-2xl text-white/80 mb-12 max-w-4xl leading-relaxed font-medium">
+                Ready to solve your toughest technical problems? We'd love to hear from you. Reach out and let's start a conversation.
+            </p>
+
+            <!-- Note: Update the form action with your actual Formspree endpoint or backend URL -->
+            <form class="max-w-4xl bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl shadow-2xl" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="grid md:grid-cols-2 gap-5 mb-5">
+                    <div>
+                        <label for="name" class="block mb-2 text-white/90 font-semibold">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Your name"
+                            required
+                            class="w-full px-5 py-4 rounded-xl border-2 border-white/10 bg-white/5 text-white placeholder-white/40 focus:border-seagull-green focus:bg-white/10 focus:outline-none transition-all"
+                        >
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-white/90 font-semibold">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            required
+                            class="w-full px-5 py-4 rounded-xl border-2 border-white/10 bg-white/5 text-white placeholder-white/40 focus:border-seagull-green focus:bg-white/10 focus:outline-none transition-all"
+                        >
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label for="company" class="block mb-2 text-white/90 font-semibold">Company</label>
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        placeholder="Your company name"
+                        class="w-full px-5 py-4 rounded-xl border-2 border-white/10 bg-white/5 text-white placeholder-white/40 focus:border-seagull-green focus:bg-white/10 focus:outline-none transition-all"
+                    >
+                </div>
+
+                <div class="mb-8">
+                    <label for="message" class="block mb-2 text-white/90 font-semibold">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us about your project..."
+                        required
+                        rows="5"
+                        class="w-full px-5 py-4 rounded-xl border-2 border-white/10 bg-white/5 text-white placeholder-white/40 focus:border-seagull-green focus:bg-white/10 focus:outline-none transition-all resize-y"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="inline-flex items-center gap-3 bg-seagull-green text-white px-12 py-4 rounded-full font-semibold text-lg hover:-translate-y-0.5 hover:shadow-xl hover:bg-seagull-dark-green transition-all focus:outline-none focus:ring-4 focus:ring-seagull-green/50"
+                >
+                    Send Message
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white/70 text-center py-10 px-6">
+        <p>&copy; 2026 Seagull Tech Solutions. All rights reserved.</p>
+        <p class="mt-2">
+            <a href="mailto:hello@seagulltech.co.uk" class="text-seagull-green hover:underline">
+                hello@seagulltech.co.uk
+            </a>
+        </p>
+    </footer>
+</body>
+</html>
