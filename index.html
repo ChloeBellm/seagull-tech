@@ -21,8 +21,7 @@
     <meta property="twitter:image" content="https://seagulltech.co.uk/logo.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +56,7 @@
     <nav class="bg-white shadow-sm sticky top-0 z-50 py-5">
         <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="logo.png" alt="Seagull Tech Solutions Ltd logo featuring interlocked green and navy circles" class="h-14 lg:h-16">
+                <img src="logo-icon.png" alt="Seagull Tech Solutions Ltd icon" class="h-12 lg:h-14">
                 <div>
                     <div class="font-montserrat text-lg font-extrabold text-seagull-dark tracking-tight">
                         Seagull Tech Solutions Ltd
@@ -124,7 +123,6 @@
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-0 right-0 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl"></div>
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-seagull-dark/5 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-seagull-green/10 rounded-full"></div>
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
@@ -319,11 +317,13 @@
             <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-white mb-8 leading-tight">
                 Let's discuss your platform needs
             </h2>
-            <p class="text-xl lg:text-2xl text-white/80 mb-12 max-w-4xl leading-relaxed font-medium">
+            <p class="text-xl lg:text-2xl text-white/80 mb-12 max-w-3xl leading-relaxed font-medium">
                 Whether you need to build a new data platform, migrate infrastructure, or optimise your existing systems, we can help. Get in touch to discuss your project.
             </p>
 
-            <form class="max-w-4xl bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl shadow-2xl" action="https://formspree.io/f/mkoogwdn" method="POST">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Form Column -->
+                <form class="bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-3xl shadow-2xl" action="https://formspree.io/f/mkoogwdn" method="POST">
                 <div class="grid md:grid-cols-2 gap-5 mb-5">
                     <div>
                         <label for="name" class="block mb-2 text-white/90 font-semibold">Name</label>
@@ -382,6 +382,14 @@
                     </svg>
                 </button>
             </form>
+
+            <!-- Logo Column -->
+            <div class="flex items-center justify-center pt-8">
+                <div class="bg-white rounded-full p-12 lg:p-16 shadow-2xl w-80 h-80 lg:w-96 lg:h-96 flex items-center justify-center">
+                    <img src="logo.png" alt="Seagull Tech Solutions Ltd" class="w-full h-auto max-w-[280px]">
+                </div>
+            </div>
+            </div>
         </div>
     </section>
     </main>
