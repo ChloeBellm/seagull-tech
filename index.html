@@ -51,10 +51,14 @@
     </script>
     <script>
         // Dark mode toggle - runs before page renders to prevent flash
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
+        // Default to dark mode unless explicitly set to light
+        if (localStorage.theme === 'light') {
             document.documentElement.classList.remove('dark')
+        } else {
+            document.documentElement.classList.add('dark')
+            if (!('theme' in localStorage)) {
+                localStorage.theme = 'dark';
+            }
         }
     </script>
 </head>
@@ -185,6 +189,56 @@
             </div>
         </div>
     </header>
+
+    <!-- Companies Section -->
+    <section class="bg-white dark:bg-gray-900 py-16 px-6 border-y border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm font-medium mb-8 uppercase tracking-wider">
+                Our team has worked with
+            </p>
+
+            <!-- Scrolling Logo Container -->
+            <div class="relative overflow-hidden">
+                <div class="flex animate-scroll whitespace-nowrap">
+                    <!-- First set of logos -->
+                    <div class="flex items-center gap-16 px-8">
+                        <img src="orgs/ovo.png" alt="OVO Energy" class="h-12 w-auto max-w-[140px] object-contain opacity-80 hover:opacity-100 transition-all">
+                        <img src="orgs/index.svg" alt="Insitu" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all p-2 bg-gray-100 dark:bg-gray-800 rounded">
+                        <img src="orgs/sainsburys.png" alt="Sainsbury's" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all">
+                        <!-- <img src="orgs/rws.svg" alt="RWS Group" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all"> -->
+                        <img src="orgs/indeed.svg" alt="Indeed" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all">
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="flex items-center gap-16 px-8">
+                        <img src="orgs/ovo.png" alt="OVO Energy" class="h-12 w-auto max-w-[140px] object-contain opacity-80 hover:opacity-100 transition-all">
+                        <img src="orgs/index.svg" alt="Insitu" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all p-2 bg-gray-100 dark:bg-gray-800 rounded">
+                        <img src="orgs/sainsburys.png" alt="Sainsbury's" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all">
+                        <!-- <img src="orgs/rws.svg" alt="RWS Group" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all"> -->
+                        <img src="orgs/indeed.svg" alt="Indeed" class="h-10 w-auto max-w-[120px] object-contain opacity-80 hover:opacity-100 transition-all">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 20s linear infinite;
+        }
+
+        .animate-scroll:hover {
+            animation-play-state: paused;
+        }
+    </style>
 
     <!-- Services Section -->
     <main id="main">
