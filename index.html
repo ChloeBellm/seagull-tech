@@ -27,10 +27,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -41,86 +42,89 @@
                     },
                     fontFamily: {
                         'montserrat': ['Montserrat', 'sans-serif'],
+                        'work-sans': ['Work Sans', 'sans-serif'],
                         'inter': ['Inter', 'sans-serif'],
                     },
                 }
             }
         }
     </script>
+    <script>
+        // Dark mode toggle - runs before page renders to prevent flash
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
 </head>
-<body class="font-inter text-gray-800 bg-white">
+<body class="font-inter text-gray-800 bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
     <!-- Skip to main content -->
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-seagull-green focus:text-white focus:rounded-lg focus:shadow-lg">
         Skip to main content
     </a>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50 py-5">
-        <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
+    <!-- Floating Header -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+            <!-- Logo & Text (Left) -->
             <div class="flex items-center gap-3">
-                <img src="logo-icon.png" alt="Seagull Tech Solutions Ltd icon" class="h-12 lg:h-14">
-                <div>
-                    <div class="font-montserrat text-lg font-extrabold text-seagull-dark tracking-tight">
-                        Seagull Tech Solutions Ltd
-                    </div>
-                    <div class="text-xs font-semibold text-seagull-green uppercase tracking-wider">
-                        Platform & Data Experts
-                    </div>
+                <img src="logo-icon.png" alt="Seagull Tech Solutions Ltd icon" class="h-16">
+                <div class="font-work-sans text-base font-medium text-seagull-dark dark:text-white">
+                    Seagull Tech Solutions Ltd
                 </div>
             </div>
 
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex gap-10 items-center">
-                <a href="#services" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">Services</a>
-                <a href="#about" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">About</a>
-                <a href="#contact" class="text-gray-600 hover:text-seagull-green font-medium transition-colors focus:outline-none focus:text-seagull-green focus:underline">Contact</a>
-            </div>
+            <!-- Navigation (Right) -->
+            <div class="flex items-center gap-8">
+                <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-seagull-green font-normal transition-colors hidden sm:block">Services</a>
+                <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-seagull-green font-normal transition-colors hidden sm:block">Contact</a>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-seagull-dark focus:outline-none focus:ring-2 focus:ring-seagull-green rounded p-2" aria-label="Toggle menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 mt-5">
-            <div class="px-6 py-4 space-y-4">
-                <a href="#services" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">Services</a>
-                <a href="#about" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">About</a>
-                <a href="#contact" class="block text-gray-600 hover:text-seagull-green font-medium transition-colors py-2">Contact</a>
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle dark mode">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
+        // Show the right icon on load
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
 
-        // Close mobile menu when clicking a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            });
+        darkModeToggle.addEventListener('click', () => {
+            // Toggle dark mode
+            document.documentElement.classList.toggle('dark');
+
+            // Toggle icons
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // Save preference
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
         });
     </script>
 
     <!-- Hero Section -->
-    <header class="relative bg-gradient-to-br from-gray-50 via-green-50/30 to-gray-50 py-24 lg:py-32 px-6 overflow-hidden">
+    <header class="relative bg-gradient-to-br from-gray-50 via-green-50/30 to-gray-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 pt-40 pb-24 lg:pt-48 lg:pb-32 px-6 overflow-hidden transition-colors duration-300">
         <!-- Decorative Background Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-0 right-0 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl"></div>
@@ -134,14 +138,14 @@
                 </svg>
                 <span>Reliable Data & Infrastructure</span>
             </div>
-            <h1 class="font-montserrat text-5xl lg:text-7xl font-extrabold text-seagull-dark mb-8 leading-tight tracking-tight">
+            <h1 class="font-work-sans text-5xl lg:text-7xl font-medium text-seagull-dark dark:text-white mb-8 leading-tight">
                 Data platforms and infrastructure <span class="text-seagull-green">that deliver</span>
             </h1>
-            <p class="text-xl lg:text-2xl text-gray-600 mb-10 max-w-4xl leading-relaxed">
+            <p class="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-4xl leading-relaxed">
                 We specialise in building data platforms from the ground up, optimising cloud costs, and implementing SRE practices that reduce incidents and improve reliability. Our track record includes delivering £240k+ in annual cost savings and 70% reduction in production incidents.
             </p>
             <div class="flex flex-col sm:flex-row gap-5 mb-16">
-                <a href="#contact" class="inline-flex items-center justify-center gap-3 bg-seagull-dark text-white px-10 py-4 rounded-full font-semibold text-lg hover:-translate-y-0.5 hover:shadow-xl transition-all focus:outline-none focus:ring-4 focus:ring-seagull-green/50">
+                <a href="#contact" class="inline-flex items-center justify-center gap-3 bg-seagull-green hover:bg-seagull-dark-green text-white px-10 py-4 rounded-full font-semibold text-lg hover:-translate-y-0.5 hover:shadow-xl transition-all focus:outline-none focus:ring-4 focus:ring-seagull-green/50">
                     Get In Touch
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -155,28 +159,28 @@
             <!-- Stats/Metrics Bar -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
                 <div class="text-center">
-                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">£240k+</div>
-                    <div class="text-sm lg:text-base text-gray-600 font-medium">Annual Cost Savings</div>
+                    <div class="font-work-sans text-3xl lg:text-4xl font-semibold text-seagull-dark dark:text-white mb-1">£240k+</div>
+                    <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium">Annual Cost Savings</div>
                 </div>
                 <div class="text-center">
-                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">70%</div>
-                    <div class="text-sm lg:text-base text-gray-600 font-medium">Incident Reduction</div>
+                    <div class="font-work-sans text-3xl lg:text-4xl font-semibold text-seagull-dark dark:text-white mb-1">70%</div>
+                    <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium">Incident Reduction</div>
                 </div>
                 <div class="text-center">
-                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">
+                    <div class="font-work-sans text-3xl lg:text-4xl font-semibold text-seagull-dark mb-1">
                         <svg class="w-10 h-10 mx-auto text-seagull-green" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
                         </svg>
                     </div>
-                    <div class="text-sm lg:text-base text-gray-600 font-medium">GCP & AWS Specialists</div>
+                    <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium">GCP & AWS Specialists</div>
                 </div>
                 <div class="text-center">
-                    <div class="font-montserrat text-3xl lg:text-4xl font-extrabold text-seagull-dark mb-1">
+                    <div class="font-work-sans text-3xl lg:text-4xl font-semibold text-seagull-dark dark:text-white mb-1">
                         <svg class="w-10 h-10 mx-auto text-seagull-green" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
                         </svg>
                     </div>
-                    <div class="text-sm lg:text-base text-gray-600 font-medium">Production-Grade Platforms</div>
+                    <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium">Production-Grade Platforms</div>
                 </div>
             </div>
         </div>
@@ -184,24 +188,24 @@
 
     <!-- Services Section -->
     <main id="main">
-        <section id="services" class="relative bg-white py-20 lg:py-28 px-6">
+        <section id="services" class="relative bg-white dark:bg-gray-900 py-20 lg:py-28 px-6 transition-colors duration-300">
             <!-- Subtle decorative element -->
             <div class="absolute top-0 right-0 w-96 h-96 bg-seagull-green/5 rounded-full blur-3xl pointer-events-none"></div>
             <div class="max-w-7xl mx-auto relative z-10">
                 <div class="text-seagull-green font-bold text-lg mb-5 text-center">What We Do</div>
-                <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-seagull-dark mb-16 text-center leading-tight">
+                <h2 class="font-work-sans text-4xl lg:text-6xl font-semibold text-seagull-dark dark:text-white mb-16 text-center leading-tight">
                     Services tailored to your needs
                 </h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <!-- Data Engineering -->
-                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                    <div class="relative bg-white dark:bg-gray-800 border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
                         <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
                         </div>
-                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">Data Engineering</h3>
-                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                        <h3 class="font-work-sans text-2xl font-medium text-seagull-dark dark:text-white mb-4">Data Engineering</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-xl leading-relaxed mb-6">
                             Build data platforms that scale. Our experience includes architecting platforms from scratch using BigQuery, Snowflake, and Postgres, managing Airbyte connectors via Terraform, integrating Cube for analytics, and deploying real-time streaming with Kafka/Confluent.
                         </p>
                         <div class="flex flex-wrap gap-2">
@@ -214,14 +218,14 @@
                     </div>
 
                     <!-- SRE -->
-                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                    <div class="relative bg-white dark:bg-gray-800 border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
                         <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
                         </div>
-                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">Site Reliability Engineering</h3>
-                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                        <h3 class="font-work-sans text-2xl font-medium text-seagull-dark dark:text-white mb-4">Site Reliability Engineering</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-xl leading-relaxed mb-6">
                             Make your systems reliable and observable. Our experience includes deploying production systems on Kubernetes, establishing comprehensive monitoring with Grafana and DataDog, setting up SLOs for critical services, and reducing backend incidents from 3/week to less than 1/week through proactive observability.
                         </p>
                         <div class="flex flex-wrap gap-2">
@@ -233,14 +237,14 @@
                     </div>
 
                     <!-- Cloud Solutions -->
-                    <div class="relative bg-white border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
+                    <div class="relative bg-white dark:bg-gray-800 border-l-4 border-seagull-green p-12 rounded-3xl shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all group">
                         <div class="w-20 h-20 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
                             </svg>
                         </div>
-                        <h3 class="font-montserrat text-2xl font-bold text-seagull-dark mb-4">AWS & GCP Solutions</h3>
-                        <p class="text-gray-700 text-xl leading-relaxed mb-6">
+                        <h3 class="font-work-sans text-2xl font-medium text-seagull-dark dark:text-white mb-4">AWS & GCP Solutions</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-xl leading-relaxed mb-6">
                             Optimise cloud costs and architecture. Our experience includes delivering £240k in annual BigQuery savings, architecting secure GCP platforms (GKE, Cloud Functions, Cloud SQL), migrating AWS to GCP, and managing everything as code with Terraform and CircleCI/GitHub Actions.
                         </p>
                         <div class="flex flex-wrap gap-2">
@@ -255,51 +259,51 @@
         </section>
 
     <!-- About Section -->
-    <section id="about" class="relative bg-gradient-to-b from-gray-50 to-white py-20 lg:py-28 px-6 overflow-hidden">
+    <section id="about" class="relative bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 py-20 lg:py-28 px-6 overflow-hidden transition-colors duration-300">
         <!-- Decorative Pattern -->
         <div class="absolute inset-0 opacity-[0.03]" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, #10b981 35px, #10b981 36px);"></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-seagull-green font-bold text-lg mb-5">What We Do</div>
-            <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-seagull-dark mb-8 leading-tight">
+            <h2 class="font-work-sans text-4xl lg:text-6xl font-semibold text-seagull-dark dark:text-white mb-8 leading-tight">
                 End-to-end data platform delivery
             </h2>
-            <p class="text-xl lg:text-2xl text-gray-700 mb-12 max-w-5xl leading-relaxed font-medium">
+            <p class="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-5xl leading-relaxed font-medium">
                 We design and build production-ready data platforms on GCP and AWS. From architecting greenfield infrastructure to optimising existing systems, we deliver projects that reduce costs, improve reliability, and enable your team to move faster. We work across startups and enterprise organisations.
             </p>
 
             <div class="space-y-5 max-w-3xl">
-                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
                     <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <span class="text-xl text-seagull-dark font-medium">Build data platforms from scratch on GCP/AWS with modern tooling</span>
+                    <span class="text-xl text-seagull-dark dark:text-white font-medium">Build data platforms from scratch on GCP/AWS with modern tooling</span>
                 </div>
-                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
                     <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <span class="text-xl text-seagull-dark font-medium">Migrate and modernize infrastructure (Redshift to Snowflake, Docker Swarm to K8s)</span>
+                    <span class="text-xl text-seagull-dark dark:text-white font-medium">Migrate and modernize infrastructure (Redshift to Snowflake, Docker Swarm to K8s)</span>
                 </div>
-                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
                     <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <span class="text-xl text-seagull-dark font-medium">Optimise cloud spend and implement cost governance across your organisation</span>
+                    <span class="text-xl text-seagull-dark dark:text-white font-medium">Optimise cloud spend and implement cost governance across your organisation</span>
                 </div>
-                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+                <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
                     <div class="w-10 h-10 bg-gradient-to-br from-seagull-green to-seagull-dark-green rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                         </svg>
                     </div>
-                    <span class="text-xl text-seagull-dark font-medium">Implement observability and SRE practices that reduce incidents and improve uptime</span>
+                    <span class="text-xl text-seagull-dark dark:text-white font-medium">Implement observability and SRE practices that reduce incidents and improve uptime</span>
                 </div>
             </div>
         </div>
@@ -316,7 +320,7 @@
 
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-seagull-green font-bold text-lg mb-5">Get In Touch</div>
-            <h2 class="font-montserrat text-4xl lg:text-6xl font-extrabold text-white mb-8 leading-tight">
+            <h2 class="font-work-sans text-4xl lg:text-6xl font-semibold text-white mb-8 leading-tight">
                 Let's discuss your platform needs
             </h2>
             <p class="text-xl lg:text-2xl text-white/80 mb-12 max-w-3xl leading-relaxed font-medium">
