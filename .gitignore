@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Personal documents
+supporting-docs/
+
+# IDE
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*-original.html
